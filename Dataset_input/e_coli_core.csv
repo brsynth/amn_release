@@ -1,0 +1,4 @@
+name,EX_co2_e_i,EX_glc__D_e_i,EX_h_e_i,EX_h2o_e_i,EX_nh4_e_i,EX_o2_e_i,EX_pi_e_i,EX_ac_e_i,EX_acald_e_i,EX_akg_e_i,EX_etoh_e_i,EX_for_e_i,EX_fru_e_i,EX_fum_e_i,EX_gln__L_e_i,EX_glu__L_e_i,EX_lac__D_e_i,EX_mal__L_e_i,EX_pyr_e_i,EX_succ_e_i
+level,1,1,1,1,1,1,1,5,5,5,5,5,5,5,5,5,5,5,5,5
+max_value,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10
+ratio_drawing,0.5,,,,,,,,,,,,,,,,,,,

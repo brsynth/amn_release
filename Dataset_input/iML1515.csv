@@ -1,0 +1,5 @@
+name,EX_pi_e_i,EX_co2_e_i,EX_fe3_e_i,EX_h_e_i,EX_mn2_e_i,EX_fe2_e_i,EX_zn2_e_i,EX_mg2_e_i,EX_ca2_e_i,EX_ni2_e_i,EX_cu2_e_i,EX_sel_e_i,EX_cobalt2_e_i,EX_h2o_e_i,EX_mobd_e_i,EX_so4_e_i,EX_nh4_e_i,EX_k_e_i,EX_na1_e_i,EX_cl_e_i,EX_o2_e_i,EX_tungs_e_i,EX_slnt_e_i,EX_glyc_e_i,EX_ala__L_e_i,EX_pro__L_e_i,EX_thr__L_e_i,EX_gly_e_i,EX_rib__D_e_i,EX_malt_e_i,EX_melib_e_i,EX_tre_e_i,EX_fru_e_i,EX_gal_e_i,EX_ac_e_i,EX_lac__D_e_i,EX_succ_e_i,EX_pyr_e_i
+level,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,100,100,100,100,100,100,100,100,100,100
+max_value,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2,2.2
+ratio_drawing,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+comment,here medium metabolites are not drawn at random (ratio=0) but taken from an experimental file,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
