@@ -1,0 +1,9 @@
+__pycache__/
+.ipynb_checkpoints/
+.Rhistory
+.DS_Store
+Dataset_input/.DS_Store
+Dataset_model/.DS_Store
+Reservoir/.DS_Store
+Result/.DS_Store
+Xpal_datasets/.DS_Store
