@@ -13,7 +13,17 @@ A tutorial is available as a notebook: `Tutorial.ipynb`. This is a good place to
 
 ### 1) Google Drive/Colab install
 
-Open this notebook and follow the instructions: 
+- Clone the repository
+
+Open this notebook, make a copy in your own Google Drive and follow the instructions: https://colab.research.google.com/drive/1AhGt8LH6MFTNToMD-VgSy25s8AgE5xDg?usp=sharing 
+
+- Install conda and import the AMN environment 
+
+Open this notebook, make a copy in your own Google Drive and follow the instructions: 
+https://colab.research.google.com/drive/1PxSfXA8NaFz3LbQ1OzOPLCwvk2EvPRrY?usp=sharing
+
+- Navigate to the root of `amn_release` in your drive and that's it! You will have access to all notebooks with the right conda environment  
+
 
 ### 2) Local install
 
@@ -47,7 +57,7 @@ Finally, independent **files** are in this repository for specific reasons, deta
 
 - Build AMN models, train them and record their performance, with `Build_Model.ipynb` (linked to the functions-storing python file `Build_Model.py`). This notebook shows many examples of AMN generation and training, with *in silico* or *in vivo* training sets. For more detailed instructions and explanations on parameters and methods, refer to the functions-storing file and the `Tutorial.ipynb` notebook.
 
-- Making figures, with `Figures.ipynb` (standalone jupyter notebook). This notebook simply makes the figures shown in the research paper of the AMN project.
+- Making figures, with `Figures.ipynb` (standalone jupyter notebook). This notebook simply generates the figures shown in the research paper of the AMN project.
 
 ### 2) Data storing folders
 
