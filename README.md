@@ -1,14 +1,55 @@
-# Artificial Metabolic Networks
+# Welcome to the Artificial Metabolic Networks repository
 
-## In this repo you will find different notebooks for different purposes:
+This repository is entirely written in python. We make use of jupyter notebooks,
+calling custom functions libraries storing the main objects and functions used in the notebooks. We detail here two ways of using the repo, either on Colab or locally.
 
-### Making training sets for AMNs, with main_Training_set.ipynb
+One can clone the git directly in a Google Drive environment and open the notebooks in Google Colab. This is a good way to make first testings and examine the project.
 
-### Building and training AMNs, with main_Build_and_Train.ipynb
+Also, one can clone the git locally and install a conda environment we provide, to be used for the project once it's linked to your jupyter environment. This will provide better reproducibility than the colab install. Then open and use notebooks as . We recommend this option for computationally costly usage of the repository.
 
-### Processing raw experimental data and making AMN-suitable datasets from these, with Xpal_data_processing.ipynb and Make_xpal_training_set.ipynb
+A tutorial is available as a notebook: `Tutorial.ipynb`. This is a good place to start, going through all the detailed steps for building an AMN. 
 
-### Generating appropriate media compositions to test in the lab, with Make_compositions_files.ipynb
+## Installation instructions:
 
-### Test the predictive performance of blackboxes on experimental training sets (will be removed!!) 
+### 1) Google Drive/Colab install
+
+Open this notebook and follow the instructions: 
+
+### 2) Local install
+
+- Clone the git (how to git clone)
+
+- Install conda if not already installed (how to install conda)
+
+- Import the environment `env.yaml` (stored at the root of the repository) with the following command:
+
+`this is the command to import env`
+
+- Add the conda environment to your jupyter environments, if not already the case (following this tutorial)
+
+- When opening the project's notebooks, make sure to activate the right `env` with 'Kernel > Change kernel'
+
+## Content description:
+
+In this repository you will find different **notebooks** that have different purposes. They are all linked to a python **function-storing file**, except for the `Figure.ipynb` notebook which runs alone. Their purpose is explained hereafter.
+
+Some **folders** store different kinds of datasets, they will be described here.
+
+Finally, independent **files** are in this repository for specific reasons, detailed below. 
+
+### 1) Notebooks and corresponding function files
+
+- Duplicate the two-sided and exchange reactions in a SBML model, with `Duplicate_Model.ipynb` (linked to the functions-storing python file `Duplicate_Model.py`). This notebook shows the step-by-step workflow This is mandatory before performing any neural computations with metabolic networks, so that all fluxes are positive. All steps are shown in the notebook, with details on each step of the process.
+
+- Build a suitable experimental dataset, with `Build_Experimental.ipynb` (linked to the functions-storing python file `Build_Experimental.py`). This notebook shows the step-by-step workflow for generating combinations of variables (in a Design of Experiments fashion) to be tested experimentally, then processing the raw data from plate reader runs, and finally building an appropriate growth rate training set.
+
+- Build *in silico* or *in vivo* (*i.e.* with experimental measures) training sets for AMNs, with `Build_Dataset.ipynb` (linked to the functions-storing python file `Build_Dataset.py`). This notebook shows many examples of training set generations, with *in silico* simulations or *in vivo* datasets. For more detailed instructions and explanations on parameters and methods, refer to the functions-storing file and the `Tutorial.ipynb` notebook.
+
+- Build AMN models, train them and record their performance, with `Build_Model.ipynb` (linked to the functions-storing python file `Build_Model.py`). This notebook shows many examples of AMN generation and training, with *in silico* or *in vivo* training sets. For more detailed instructions and explanations on parameters and methods, refer to the functions-storing file and the `Tutorial.ipynb` notebook.
+
+- Making figures, with `Figures.ipynb` (standalone jupyter notebook). This notebook simply makes the figures shown in the research paper of the AMN project.
+
+### 2) Data storing folders
+
+- 
 
