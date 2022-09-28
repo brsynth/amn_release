@@ -24,6 +24,10 @@ https://colab.research.google.com/drive/1PxSfXA8NaFz3LbQ1OzOPLCwvk2EvPRrY?usp=sh
 
 - Navigate to the root of `amn_release` in your drive and that's it! You will have access to all notebooks with the right conda environment.
 
+- Optionally use this notebook to make updates on the git repository:
+https://colab.research.google.com/drive/1GyMEHPubIQzaZmUOXLpsjl7R6Hi893Ic?usp=sharing
+
+
 
 ### 2) Local install
 
