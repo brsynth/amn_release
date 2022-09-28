@@ -5,7 +5,7 @@ calling custom functions libraries storing the main objects and functions used i
 
 One can clone the git directly in a Google Drive environment and open the notebooks in Google Colab. This is a good way to make first testings and examine the project.
 
-Also, one can clone the git locally and install a conda environment we provide, to be used for the project once it's linked to your jupyter environment. This will provide better reproducibility than the colab install. Then open and use notebooks as . We recommend this option for computationally costly usage of the repository.
+Also, one can clone the git locally and install a conda environment we provide, to be used for the project once it's linked to your jupyter environment. This will provide better reproducibility than the colab install. We recommend this option for computationally costly usage of the repository.
 
 A tutorial is available as a notebook: `Tutorial.ipynb`. This is a good place to start, going through all the detailed steps for building an AMN. 
 
@@ -13,16 +13,16 @@ A tutorial is available as a notebook: `Tutorial.ipynb`. This is a good place to
 
 ### 1) Google Drive/Colab install
 
-- Clone the repository
+- Clone the repository:
 
-Open this notebook, make a copy in your own Google Drive and follow the instructions: https://colab.research.google.com/drive/1AhGt8LH6MFTNToMD-VgSy25s8AgE5xDg?usp=sharing 
+Open this notebook, make a copy in your own Google Drive (File > Save a copy in Drive) and follow the instructions: https://colab.research.google.com/drive/1AhGt8LH6MFTNToMD-VgSy25s8AgE5xDg?usp=sharing 
 
 - Install conda and import the AMN environment 
 
-Open this notebook, make a copy in your own Google Drive and follow the instructions: 
+Open this notebook, make a copy in your own Google Drive (File > Save a copy in Drive) and follow the instructions: 
 https://colab.research.google.com/drive/1PxSfXA8NaFz3LbQ1OzOPLCwvk2EvPRrY?usp=sharing
 
-- Navigate to the root of `amn_release` in your drive and that's it! You will have access to all notebooks with the right conda environment  
+- Navigate to the root of `amn_release` in your drive and that's it! You will have access to all notebooks with the right conda environment.
 
 
 ### 2) Local install
