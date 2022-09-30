@@ -1013,7 +1013,10 @@ def evaluate_model(model, x, y_true, parameter, verbose=False):
         yt, yp = y_true[:,:end], y_pred[:,:end]
         if yt.shape[0] == 1: # LOO case
             rss, tss = (yp - yt) * (yp - yt), yt * yt
-            obj = 1 - np.sum(rss) / np.sum(tss)
+            if np.sum(tss) > 0:
+                obj = 1 - np.sum(rss) / np.sum(tss)
+            else:
+                obj = 1 - np.sum(rss)
             print('LOO True, Pred, Q2 =', yt, yp, obj)
         else:
             obj = r2_score(yt, yp, multioutput='variance_weighted')
@@ -1075,7 +1078,7 @@ def train_model(parameter, Xtrain, Ytrain, Xtest, Ytest, verbose=False):
     # - history: tf fit histrory
     # Must have verbose=2 to verbose the fit 
     
-    Niter = 5 # maximum number of attempts to fit 
+    Niter = 1 # maximum number of attempts to fit 
 
     # Create model fit and evaluate
     for kiter in range(Niter): # Looping until properly trained
@@ -1158,7 +1161,7 @@ def train_evaluate_model(parameter, verbose=False):
 
     # Cross-validation loop
     Otrain, Otest, Ltrain, Ltest, Omax, Netmax, Ypred = \
-    [], [], [], [], -1000, None, np.copy(Y)
+    [], [], [], [], -1.0e-32, None, np.copy(Y)
     kfold = KFold(n_splits=param.xfold, shuffle=True)
     kiter = 0
     for train, test in kfold.split(X, Y):
