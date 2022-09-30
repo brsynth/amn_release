@@ -1,0 +1,1 @@
+./Dataset_model/e_coli_core_UB,ANN_Dense,['BIOMASS_Ecoli_core_w_GAM'],0.0,20,1,1,50,relu,0,1.0,0.9,500,True,0.001,0.25,5,0,5,False
