@@ -21,7 +21,7 @@
 # Authors: Jean-loup Faulon, jfaulon@gmail.com and Bastien Mollet (LP model)
 ###############################################################################
 
-from Build_Dataset import *
+from Functions.Build_Dataset import *
     
 import keras
 import keras.backend as K
