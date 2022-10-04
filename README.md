@@ -7,7 +7,7 @@ One can clone the git directly in a Google Drive environment and open the notebo
 
 Also, one can clone the git locally and install a conda environment we provide, to be used for the project once it's linked to your jupyter environment. This will provide better reproducibility than the colab install. We recommend this option for computationally costly usage of the repository.
 
-A tutorial is available as a notebook: `Tutorial.ipynb`. This is a good place to start, going through all the detailed steps for building an AMN. 
+A tutorial is available as a notebook: `Tutorial.ipynb`. This is a good place to start, going through all the detailed steps for building and training an AMN model. 
 
 ## Installation instructions:
 
@@ -15,33 +15,31 @@ A tutorial is available as a notebook: `Tutorial.ipynb`. This is a good place to
 
 - Clone the repository:
 
-Open this notebook, make a copy in your own Google Drive (File > Save a copy in Drive) and follow the instructions: https://colab.research.google.com/drive/1AhGt8LH6MFTNToMD-VgSy25s8AgE5xDg?usp=sharing 
-
-- Install conda and import the AMN environment 
-
 Open this notebook, make a copy in your own Google Drive (File > Save a copy in Drive) and follow the instructions: 
-https://colab.research.google.com/drive/1PxSfXA8NaFz3LbQ1OzOPLCwvk2EvPRrY?usp=sharing
 
-- Navigate to the root of `amn_release` in your drive and that's it! You will have access to all notebooks with the right conda environment.
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1AhGt8LH6MFTNToMD-VgSy25s8AgE5xDg?usp=sharing)
 
-- Optionally use this notebook to make updates on the git repository:
-https://colab.research.google.com/drive/1GyMEHPubIQzaZmUOXLpsjl7R6Hi893Ic?usp=sharing
 
+- Navigate to the root of `amn_release` in your drive and that's it! You will have access to all notebooks with the right conda environment. Simply double-click any notebook to open it in colab, and follow the instructions in each of them.
+
+NB: Avoid costly operations in colab!
 
 
 ### 2) Local install
 
-- Clone the git (how to git clone)
+- Clone the git ([how to clone a git repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository))
 
-- Install conda if not already installed (how to install conda)
+- Install a distribution of conda if not already installed ([how to install conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html#regular-installation))
 
-- Import the environment `env.yaml` (stored at the root of the repository) with the following command:
+- Import the environment `environment_amn.yaml` (stored at the root of the repository) with the following command:
 
-`this is the command to import env`
+`conda env create -n AMN --file environment_amn.yml`
 
-- Add the conda environment to your jupyter environments, if not already the case (following this tutorial)
+NB: One can change the name 'AMN' to anything
 
-- When opening the project's notebooks, make sure to activate the right `env` with 'Kernel > Change kernel'
+- Make your conda environment accessible to jupyter, if not already the case ([how to get conda environments in jupyter](https://towardsdatascience.com/get-your-conda-environment-to-show-in-jupyter-notebooks-the-easy-way-17010b76e874))
+
+- When opening the project's notebooks, make sure to use the right `kernel` with 'Kernel > Change kernel' in the toolbar.
 
 ## Content description:
 
@@ -63,7 +61,29 @@ Finally, independent **files** are in this repository for specific reasons, deta
 
 - Making figures, with `Figures.ipynb` (standalone jupyter notebook). This notebook simply generates the figures shown in the research paper of the AMN project.
 
+NB: All function-storing python files are under the folder `/Functions`.
+
 ### 2) Data storing folders
 
-- 
+- `Dataset_experimental` containing all experimental data used for the AMN research paper. It contains raw data (`_data.csv` suffix), companion files for processing the raw data (`_start_stop.csv` and `_compos.csv` suffixes) and processed data (`_results.csv` suffix). It also contains raw compositions generated in a Design of Experiments fashion (`compositions_` prefix). Finally, here is stored the final dataset used in the AMN research paper, called `EXP110.csv`
+
+- `Dataset_input` containing files for guiding the generation of training sets. It contains the models (`.xml` extension) and associated files for guiding the generation of training sets with corresponding models (`.csv` extension). It also contains solutions to be used with cobrapy (when performing reservoir computing, extracting the exchange reactions predicted bounds), for practical reasons.
+
+- `Dataset_model` containing training sets (`.npz` extension) and associated model hyper-parameters files (`.xml` extension). The filenames are built as follows: name of the metabolic model used to generate the training set + type of bound + number of elements in the training set.
+
+- `Reservoir` contains trained models (`.h5` extension) and corresponding model parameters files (`.csv` extension). The filenames are built as follows: name of the metabolic model used to generate the training set + type of bound + number of elements in the training set + model type for learning.
+
+- `Result` contains various raw data files used to generate figures in the `Figures.ipynb` notebook. One can refer directly to this notebook to know how each data file is used.
+
+NB: `/Functions` is only storing function-storing files, `/Figures` is only storing figures.
+
+### 3) Independent files
+
+- `README.md` is the file you are reading.
+
+- `LICENSE` gives an MIT licensing to the project.
+
+- `environment_amn.yml` is the file to create an appropriate conda environment for a **local** install. It has exactly the same packages and versions than the environment used to develop this project.
+
+- `environment_amn_light.yml` is the file to create an appropriate conda environment for a **colab** install. It has just a few missing packages that are not by default in colab, and needed for this project.
 
