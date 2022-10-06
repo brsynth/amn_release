@@ -69,9 +69,9 @@ NB: All function-storing python files are under the folder `/Functions`.
 
 ### 2) Data storing folders
 
-- `Dataset_experimental` containing all **experimental** data used for the AMN research paper. It contains raw data (`_data.csv` suffix), companion files for processing the raw data (`_start_stop.csv` and `_compos.csv` suffixes) and processed data (`_results.csv` suffix). It also contains raw compositions generated in a Design of Experiments fashion (`compositions_` prefix). Finally, here is stored the final dataset used in the AMN research paper, called `EXP110.csv`
+- `Dataset_experimental` containing all **experimental** data used for the AMN research paper. It contains raw data (`_data.csv` suffix), companion files for processing the raw data (`_start_stop.csv` and `_compos.csv` suffixes) and processed data (`_results.csv` suffix). It also contains raw compositions generated in a Design of Experiments fashion (`compositions_` prefix). Finally, here is stored the final dataset used in the AMN research paper, called `EXP110.csv`.
 
-- `Dataset_input` containing files for **guiding** the generation of training sets. It contains the models (`.xml` extension) and associated files for guiding the generation of training sets with corresponding models (`.csv` extension). It also contains solutions to be used with cobrapy (when performing reservoir computing, extracting the exchange reactions predicted bounds), for practical reasons.
+- `Dataset_input` containing files for **guiding** the generation of training sets. It contains the models (`.xml` extension) and associated files for guiding the generation of training sets with corresponding models (`.csv` extension). It also contains solutions to be used with cobrapy (when performing reservoir computing, extracting the exchange reactions predicted bounds), for practical reasons. Note that models must be saved since a reduction of the model can be performed in `Build_Dataset.ipynb`.
 
 - `Dataset_model` containing **training sets** (`.npz` extension) and associated model files (`.xml` extension). The filenames are built as follows: name of the metabolic model used to generate the training set + type of bound + number of elements in the training set.
 
