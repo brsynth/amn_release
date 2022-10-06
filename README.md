@@ -7,7 +7,9 @@ One can clone the git directly in a Google Drive and open the notebooks in Googl
 
 Also, one can clone the git locally and install a **conda** environment we provide, to be used for the project once it's linked to your jupyter environment. This will provide better reproducibility than the colab install. We recommend this option for computationally costly usage of the repository.
 
-A **tutorial** is available as the notebook `Tutorial.ipynb`. This is a good place to start, going through all the detailed steps for building and training an AMN model. 
+A **tutorial** is available as the notebook `Tutorial.ipynb`. This is a good place to start, going through all the detailed steps for building and training an AMN model.
+
+Note: For local installs, only Linux (Ubuntu 22.04) and MacOS (Monterey) have been tested, but Windows should work.
 
 ## Installation instructions:
 
@@ -45,7 +47,7 @@ NB: One can change the name 'AMN' to anything, this will be the name of your cre
 
 ## Content description:
 
-In this repository you will find different **notebooks** that have different purposes. They are all linked to a python **function-storing file**, except for the `Figure.ipynb` notebook which runs alone. Their purpose is explained hereafter.
+In this repository you will find different **notebooks** that have different purposes. They are all linked to a python **function-storing file**, except for the `Figures.ipynb` notebook which runs alone. Their purpose is explained hereafter.
 
 Some **folders** store different kinds of datasets, which will be described here.
 

@@ -3,13 +3,6 @@ name: amn  # you can edit this if you want
 channels:
   - defaults
 dependencies:
-  # If any of your packages pulls in cudatoolkit:
-  # uncomment the line below to make sure it matches
-  # the output of `!echo $CUDA_VERSION` on colab
-  # and take only the major.minor components
-  # Right now, Colab uses CUDA 11.1
-  # - cudatoolkit =11.1
-
   # Add your dependencies below this line
   # -------------------------------------
   - h5py=3.2.1
