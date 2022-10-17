@@ -26,7 +26,7 @@ Open this notebook, make a copy in your own Google Drive if you want to make mod
 
  And that's it! You will have access to all notebooks. Simply double-click any notebook to open it in colab, and follow the instructions in each of them.
 
-NB: Avoid costly operations in Colab. Also, a fresh environment is created for each notebook opened, expect around 3 minutes of installation each time you open a new notebook.
+NB: Avoid costly operations in Colab. Also, a fresh environment is created for each notebook opened, expect around 3 minutes of installation each time you open a new notebook. And don't panic if you see the Colab kernel restarting automatically, it's necessary for conda to work in Colab.
 
 
 ### 2) Local install
@@ -61,11 +61,11 @@ Finally, independent **files** are in this repository for specific reasons, deta
 
 - Build *in silico* or *in vivo* (*i.e.* with experimental measures) training sets for AMNs, with `Build_Dataset.ipynb` (linked to the functions-storing python file `Build_Dataset.py`). This notebook shows many examples of training set generations, with *in silico* simulations or *in vivo* datasets. For more detailed instructions and explanations on parameters and methods, refer to the functions-storing file and the `Tutorial.ipynb` notebook.
 
-- Build AMN models, train them and record their performance, with `Build_Model.ipynb` (linked to the functions-storing python file `Build_Model.py`). This notebook shows many examples of AMN generation and training, with *in silico* or *in vivo* training sets. For more detailed instructions and explanations on parameters and methods, refer to the functions-storing file and the `Tutorial.ipynb` notebook.
+- Build AMN models, train them and record their performance, with all notebooks starting with `Build_Model_` (linked to the functions-storing python file `Build_Model.py`). These notebooks shows many examples of models generation and training, with *in silico* or *in vivo* training sets. For more detailed instructions and explanations on parameters and methods, refer to the functions-storing file and the `Tutorial.ipynb` notebook. A variety of notebooks are available, each designed for a specific model type. The suffixes correspond to: `MM` for mechanistic models (no learning), `ANN_Dense` for classical dense neural networks, `AMN` for the hybrid models we developed in this project, and `RC` for the reservoir computing framework to use on top of a trained AMN.
 
-- Making figures, with `Figures.ipynb` (standalone jupyter notebook). This notebook simply generates the figures shown in the research paper of the AMN project.
+- Making figures, with `Figures.ipynb` (standalone jupyter notebook). This notebook simply generates the figures shown in the research paper of the AMN project. It is a standalone notebook that isn't linked to any function-storing file.
 
-NB: All function-storing python files are under the folder `/Functions`.
+NB: All function-storing python files are under the folder `/Library`.
 
 ### 2) Data storing folders
 
@@ -79,7 +79,7 @@ NB: All function-storing python files are under the folder `/Functions`.
 
 - `Result` contains various **raw data** files used to generate figures in the `Figures.ipynb` notebook. One can refer directly to this notebook to know how each data file is used.
 
-NB: `/Functions` is only storing function-storing files, `/Figures` is only storing figures.
+NB: `/Library` is only storing function-storing python files, `/Figures` is only storing figures.
 
 ### 3) Independent files
 
