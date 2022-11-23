@@ -142,7 +142,7 @@ def get_matrices(model, medium, measure, reactions):
         j = get_index_from_id(rid,reactions)
         Pout[i][j] = 1
         i = i+1
-
+    
     return S, Pin, Pout, V2M, M2V
 
 def row_echelon(A,C):
@@ -371,7 +371,41 @@ def get_matrices_LP(model, mediumbound, X, S, Pin, medium, objective,
     S_ext = np.float32(S_ext)
     Q  = np.float32(Q)
     P  = np.float32(P)
-    return S_int, S_ext, Q, P, b_int, b_ext, Sb, c
+
+    # Default bounds for the model
+    def_UB = []
+    def_LB = []
+    for r in model.reactions:
+        def_UB.append(r.upper_bound)
+        def_LB.append(r.lower_bound)
+
+    # Replace default by X values for Upper Bounds (UB case)
+    # or both UB and LB for Exact Bounds (EB case)
+
+    X[X==0] = -1 # -1 for real 0 bounds, others are let to default bounds
+    x_bounds = np.matmul(X, Pin)
+    UB = []
+    LB = []
+    for x_bound in x_bounds:
+        print(x_bound[-20:])
+        i=0
+        this_UB = def_UB
+        this_LB = def_LB
+        for bound in x_bound:
+            if bound < 0:
+                this_UB[i] = 0
+                this_LB[i] = 0 # should not be useful for now
+            elif bound > 0:
+                this_UB[i] = bound
+            if mediumbound == 'EB':
+                this_LB[i] = bound
+            i += 1
+        print(this_UB[-20:])
+        print(this_LB[-20:])
+        UB.append(this_UB)
+        LB.append(this_LB)
+
+    return S_int, S_ext, Q, P, b_int, b_ext, Sb, c, UB, LB
 
 def reduce_model(model, medium, measure, flux, verbose=False):
     # Remove all reactions not in medium having a zero flux
@@ -544,7 +578,7 @@ def create_random_medium_cobra(model, objective,
         except:
             print('Cobra cannot be run start again')
             treshold, iteration, up, valmed = \
-            init_constrained_objective(objective_value, in_treshold, 
+            init_constrained_objective(objective_value, in_treshold, \
                             modmed, valmed, verbose=verbose)
             continue
             
@@ -656,8 +690,8 @@ class TrainingSet:
 
         # compute matrices and objective vector for AMN
         self.S, self.Pin, self.Pout, self.V2M, self.M2V = \
-        get_matrices(self.model, self.medium, self.measure,
-                     self.model.reactions)
+            get_matrices(self.model, self.medium, self.measure,\
+             self.model.reactions)
 
     def reduce_and_run(self,verbose=False):
         # reduce a model recompute matrices and rerun cobra
@@ -677,11 +711,12 @@ class TrainingSet:
         if self.reduce:
             self.reduce_and_run(verbose=verbose)
         # Recompute matrices
-        self.S, self.Pin, self.Pout, self.V2M, self.M2V = \
-        get_matrices(self.model, self.medium, self.measure,
-                         self.model.reactions)
+        self.S, self.Pin, self.Pout, self.V2M, self.M2V,\
+         = get_matrices(self.model, self.medium, \
+            self.measure, self.model.reactions)
+
         self.S_int, self.S_ext, self.Q, self.P, \
-        self.b_int, self.b_ext, self.Sb, self.c = \
+        self.b_int, self.b_ext, self.Sb, self.c, self.UB, self.LB = \
         get_matrices_LP(self.model, self.mediumbound, self.X, self.S,
                              self.Pin, self.medium, self.objective)
         # save cobra file
@@ -714,7 +749,9 @@ class TrainingSet:
                             b_int = self.b_int,
                             b_ext = self.b_ext,
                             Sb = self.Sb,
-                            c = self.c)
+                            c = self.c,
+                            UB = self.UB,
+                            LB = self.LB)
         
     def load(self, filename):
         # load parameters (npz format)
@@ -750,6 +787,8 @@ class TrainingSet:
         self.b_ext = loaded['b_ext']
         self.Sb = loaded['Sb']
         self.c = loaded['c']
+        self.UB = loaded['UB']
+        self.LB = loaded['LB']
         self.allmatrices = True
         self.model = cobra.io.read_sbml_model(self.cobraname+'.xml')
 
@@ -784,6 +823,8 @@ class TrainingSet:
             print('b_ext vector', self.b_ext.shape)
             print('Sb matrix', self.Sb.shape)
             print('c vector', self.c.shape)
+            print('Upper bounds', self.UB.shape)
+            print('Lower bounds', self.LB.shape)
         if filename != '':
             sys.stdout.close()
 
@@ -842,8 +883,9 @@ class TrainingSet:
         # - self.Yall all reactions
         
         self.measure = measure if len(self.measure) > 0 else self.measure
-        _, _, self.Pout, _, _ = \
-        get_matrices(self.model, self.medium, self.measure, self.model.reactions)
+        _, _, self.Pout, _, _, _, _ = \
+        get_matrices(self.model, self.medium, self.measure, \
+            self.model.reactions, self.X, self.mediumbound)
         self.Yall = self.Y.copy()
         if self.measure != []:
             # Y = only the reaction fluxes that are in Vout
