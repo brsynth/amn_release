@@ -1161,7 +1161,7 @@ def train_evaluate_model(parameter, verbose=False):
 
     # Cross-validation loop
     Otrain, Otest, Ltrain, Ltest, Omax, Netmax, Ypred = \
-    [], [], [], [], -1.0e-32, None, np.copy(Y)
+    [], [], [], [], -1.0e32, None, np.copy(Y)
     kfold = KFold(n_splits=param.xfold, shuffle=True)
     kiter = 0
     for train, test in kfold.split(X, Y):
