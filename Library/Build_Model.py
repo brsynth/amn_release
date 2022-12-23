@@ -309,7 +309,8 @@ def input_AMN(parameter, verbose=False):
         if parameter.mediumbound == 'UB':
             parameter.b_int, parameter.b_ext = b_int, b_ext
         else: # EB
-            parameter.b_int, parameter.b_ext = b_ext, b_int
+            # parameter.b_int, parameter.b_ext = b_ext, b_int
+            parameter.b_int, parameter.b_ext = b_int, b_ext
         if verbose: print('LP input shape', X.shape,Y.shape)
     elif 'Wt' in parameter.model_type:
         x = np.copy(X)
@@ -504,6 +505,7 @@ def LP(V, M, b_int, b_ext, parameter, verbose=False):
     # The main difference between EB and UB is on the precomputed matrixes
     # S_int, S_ext, Q, P, Sb and the b_int and b_ext vectors
     SV  = tf.linalg.matvec(S_ext, V, transpose_a=True) # R = (M + S_extV - b_ext)^+    
+    # print("M, SV, b_ext, b_int, S_int", M.shape, SV.shape, b_ext.shape, b_int.shape, S_int.shape)
     R  = tf.keras.activations.relu(M + SV - b_ext)
     dV1 = tf.linalg.matvec(S_ext, R) + c # dV1 = P(S_extR + c) 
     dV1 = tf.linalg.matvec(P, dV1)
@@ -561,15 +563,19 @@ def LP_layers(inputs_bounds, parameter, targets = np.asarray([]).reshape(0,0),
     history = False if trainable else history
 
     # Initialize AMN with VO, M0, b_int, b_ext
+    print("inputs_bounds ", inputs_bounds.shape)
     inputs = CROP(1, 0, parameter.Pin.shape[0]) (inputs_bounds)
+    print("inputs ", inputs.shape)
     b_int = CROP(1, parameter.Pin.shape[0], 
                     parameter.Pin.shape[0] \
                  + parameter.b_int.shape[1] ) (inputs_bounds)
+    print("b_int ", b_int.shape)
     b_ext = CROP(1, parameter.Pin.shape[0] \
                  + parameter.b_int.shape[1], 
                     parameter.Pin.shape[0] \
                  + parameter.b_int.shape[1] \
                  + parameter.b_ext.shape[1] ) (inputs_bounds)
+    print("b_ext ", b_ext.shape)
     V0, Vin, Vout, mask = get_V0(inputs, parameter, 
                                  targets, trainable, verbose=verbose)
     M0 = get_M0(inputs, parameter, targets, trainable, verbose=verbose) 
