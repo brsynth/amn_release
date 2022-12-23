@@ -1,28 +1,19 @@
-name: amn  # you can edit this if you want
-
+name: amn
 channels:
+  - conda-forge
   - defaults
 dependencies:
-  # Add your dependencies below this line
-  # -------------------------------------
-  - h5py=3.2.1
-  - keras-preprocessing=1.1.2
+  - python=3.7
+  - tensorflow=2.6
   - numpy=1.20.3
-  - numpy-base=1.20.3
-  - pandas=1.3.3
-  - scikit-learn=0.24.2
-  - scipy=1.7.1
-  - tensorboard=2.6.0
-  - tensorboard-data-server=0.6.0
-  - tensorboard-plugin-wit=1.6.0
-  - tensorflow=2.6.0
-  - tensorflow-base=2.6.0
-  - tensorflow-estimator=2.6.0
-  - keras=2.6.0
-  - matplotlib=3.4.3
-  - seaborn=0.11.2
-  - sympy=1.8
-  - pydoe2=1.3.0
-  - cobra=0.22.1
+  - pandas
+  - cobra
+  - scikit-learn
+  - keras=2.6
+  - matplotlib
+  - seaborn
+  - pydoe2
+  - pip
+  - ipykernel
   - pip:
-    - silence-tensorflow==1.1.1
+    - silence-tensorflow
