@@ -22,7 +22,7 @@
 ###############################################################################
 
 from Library.Build_Dataset import *
-    
+
 import keras
 import keras.backend as K
 import tensorflow as tf
@@ -306,11 +306,14 @@ def input_AMN(parameter, verbose=False):
         x = np.vstack([x]*X.shape[0]) if len(x.shape) == 1 else x
         b_ext = np.copy(x)
         X = np.concatenate((X, x), axis=1)  
-        if parameter.mediumbound == 'UB':
+        if parameter.mediumbound == 'UB' or "MM" in parameter.model_type:
+            # print("NOT switching b_int and b_ext")
             parameter.b_int, parameter.b_ext = b_int, b_ext
-        else: # EB
-            # parameter.b_int, parameter.b_ext = b_ext, b_int
-            parameter.b_int, parameter.b_ext = b_int, b_ext
+        else:
+            # EB case, but does not apply to MM notebooks
+            # print("switching b_int and b_ext")
+            parameter.b_int, parameter.b_ext = b_ext, b_int
+            # parameter.b_int, parameter.b_ext = b_int, b_ext
         if verbose: print('LP input shape', X.shape,Y.shape)
     elif 'Wt' in parameter.model_type:
         x = np.copy(X)
@@ -563,19 +566,19 @@ def LP_layers(inputs_bounds, parameter, targets = np.asarray([]).reshape(0,0),
     history = False if trainable else history
 
     # Initialize AMN with VO, M0, b_int, b_ext
-    print("inputs_bounds ", inputs_bounds.shape)
+    # print("inputs_bounds ", inputs_bounds.shape)
     inputs = CROP(1, 0, parameter.Pin.shape[0]) (inputs_bounds)
-    print("inputs ", inputs.shape)
+    # print("inputs ", inputs.shape)
     b_int = CROP(1, parameter.Pin.shape[0], 
                     parameter.Pin.shape[0] \
                  + parameter.b_int.shape[1] ) (inputs_bounds)
-    print("b_int ", b_int.shape)
+    # print("b_int ", b_int.shape)
     b_ext = CROP(1, parameter.Pin.shape[0] \
                  + parameter.b_int.shape[1], 
                     parameter.Pin.shape[0] \
                  + parameter.b_int.shape[1] \
                  + parameter.b_ext.shape[1] ) (inputs_bounds)
-    print("b_ext ", b_ext.shape)
+    # print("b_ext ", b_ext.shape)
     V0, Vin, Vout, mask = get_V0(inputs, parameter, 
                                  targets, trainable, verbose=verbose)
     M0 = get_M0(inputs, parameter, targets, trainable, verbose=verbose) 
@@ -1367,8 +1370,9 @@ class Neural_Model:
         self.get_parameter(verbose=verbose)
         # Then load model
         if (self.model_type == 'AMN_Wt'):
-            self.model = load_model(filemodel,custom_objects=\
-                                   {'RNNCell':RNNCell,'parameter':Neural_Model}, 
+            self.model = load_model(filemodel,
+                                    custom_objects={'RNNCell':RNNCell,
+                                                    'parameter':Neural_Model},
                                     compile=False)
         else:
             self.model = load_model(filemodel, compile=False)
