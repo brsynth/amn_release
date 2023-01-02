@@ -1321,6 +1321,13 @@ class Neural_Model:
         with open(fileparam, "w") as h:
             # print(s, file = h)
             h.write(s)
+        if self.model_type == "AMN_LP":
+            json = filename + "_model.json"
+            self.model.save_weights(filemodel)
+            model_json = self.model.to_json()
+            with open(json, "w") as json_file:
+                json_file.write(model_json)
+            json_file.close()
         self.model.save(filemodel)
 
 
@@ -1369,11 +1376,22 @@ class Neural_Model:
         # Get additional parameters (matrices)
         self.get_parameter(verbose=verbose)
         # Then load model
-        if (self.model_type == 'AMN_Wt'):
+        if self.model_type == 'AMN_Wt':
             self.model = load_model(filemodel,
                                     custom_objects={'RNNCell':RNNCell,
                                                     'parameter':Neural_Model},
                                     compile=False)
+        elif self.model_type == 'AMN_LP':
+            print("bugs here")
+            from keras.models import model_from_json
+            json = filename + "_model.json"
+            json_file = open(json, 'r')
+            loaded_model_json = json_file.read()
+            json_file.close()
+            model = model_from_json(loaded_model_json)
+            model.load_weights(filemodel)
+            self.model = model
+            print("loaded")
         else:
             self.model = load_model(filemodel, compile=False)
 
