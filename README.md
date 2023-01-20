@@ -7,13 +7,15 @@ One can clone the git directly in a Google Drive and open the notebooks in Googl
 
 Also, one can clone the git locally and install a **conda** environment we provide, to be used for the project once it's linked to your jupyter environment. This will provide better reproducibility than the colab install. We recommend this option for computationally costly usage of the repository.
 
-A **tutorial** is available as the notebook `Tutorial.ipynb`. This is a good place to start, going through all the detailed steps for building and training an AMN model.
+A **tutorial** is available as the notebook `Tutorial.ipynb`. This is a good place to start, going through all the detailed steps for building and training an AMN model. This step-by-step exploration of the project will take about 20 minutes to be runned.
 
 Note: For local installs, only Linux (Ubuntu 22.04) and MacOS (Monterey) have been tested, but Windows should work.
 
 ## Installation instructions:
 
 ### 1) Google Drive/Colab install
+
+This install takes about 3 minutes, then each notebook needs 3 additional minutes to be runned.
 
 - **Clone the repository**
 
@@ -30,6 +32,8 @@ NB: Avoid costly operations in Colab. Also, a fresh environment is created for e
 
 
 ### 2) Local install
+
+This install takes between 5 and 15 minutes (if you already connected jupyter and conda together, it will be shorter).
 
 - **Clone** the git ([how to clone a git repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository))
 

@@ -22,7 +22,7 @@
 ###############################################################################
 
 from Library.Build_Dataset import *
-    
+
 import keras
 import keras.backend as K
 import tensorflow as tf
@@ -306,10 +306,14 @@ def input_AMN(parameter, verbose=False):
         x = np.vstack([x]*X.shape[0]) if len(x.shape) == 1 else x
         b_ext = np.copy(x)
         X = np.concatenate((X, x), axis=1)  
-        if parameter.mediumbound == 'UB':
+        if parameter.mediumbound == 'UB' or "MM" in parameter.model_type:
+            # print("NOT switching b_int and b_ext")
             parameter.b_int, parameter.b_ext = b_int, b_ext
-        else: # EB
+        else:
+            # EB case, but does not apply to MM notebooks
+            # print("switching b_int and b_ext")
             parameter.b_int, parameter.b_ext = b_ext, b_int
+            # parameter.b_int, parameter.b_ext = b_int, b_ext
         if verbose: print('LP input shape', X.shape,Y.shape)
     elif 'Wt' in parameter.model_type:
         x = np.copy(X)
@@ -504,6 +508,7 @@ def LP(V, M, b_int, b_ext, parameter, verbose=False):
     # The main difference between EB and UB is on the precomputed matrixes
     # S_int, S_ext, Q, P, Sb and the b_int and b_ext vectors
     SV  = tf.linalg.matvec(S_ext, V, transpose_a=True) # R = (M + S_extV - b_ext)^+    
+    # print("M, SV, b_ext, b_int, S_int", M.shape, SV.shape, b_ext.shape, b_int.shape, S_int.shape)
     R  = tf.keras.activations.relu(M + SV - b_ext)
     dV1 = tf.linalg.matvec(S_ext, R) + c # dV1 = P(S_extR + c) 
     dV1 = tf.linalg.matvec(P, dV1)
@@ -561,15 +566,19 @@ def LP_layers(inputs_bounds, parameter, targets = np.asarray([]).reshape(0,0),
     history = False if trainable else history
 
     # Initialize AMN with VO, M0, b_int, b_ext
+    # print("inputs_bounds ", inputs_bounds.shape)
     inputs = CROP(1, 0, parameter.Pin.shape[0]) (inputs_bounds)
+    # print("inputs ", inputs.shape)
     b_int = CROP(1, parameter.Pin.shape[0], 
                     parameter.Pin.shape[0] \
                  + parameter.b_int.shape[1] ) (inputs_bounds)
+    # print("b_int ", b_int.shape)
     b_ext = CROP(1, parameter.Pin.shape[0] \
                  + parameter.b_int.shape[1], 
                     parameter.Pin.shape[0] \
                  + parameter.b_int.shape[1] \
                  + parameter.b_ext.shape[1] ) (inputs_bounds)
+    # print("b_ext ", b_ext.shape)
     V0, Vin, Vout, mask = get_V0(inputs, parameter, 
                                  targets, trainable, verbose=verbose)
     M0 = get_M0(inputs, parameter, targets, trainable, verbose=verbose) 
@@ -1161,7 +1170,7 @@ def train_evaluate_model(parameter, verbose=False):
 
     # Cross-validation loop
     Otrain, Otest, Ltrain, Ltest, Omax, Netmax, Ypred = \
-    [], [], [], [], -1.0e-32, None, np.copy(Y)
+    [], [], [], [], -1.0e32, None, np.copy(Y)
     kfold = KFold(n_splits=param.xfold, shuffle=True)
     kiter = 0
     for train, test in kfold.split(X, Y):
@@ -1312,6 +1321,13 @@ class Neural_Model:
         with open(fileparam, "w") as h:
             # print(s, file = h)
             h.write(s)
+        if self.model_type == "AMN_LP":
+            json = filename + "_model.json"
+            self.model.save_weights(filemodel)
+            model_json = self.model.to_json()
+            with open(json, "w") as json_file:
+                json_file.write(model_json)
+            json_file.close()
         self.model.save(filemodel)
 
 
@@ -1360,10 +1376,22 @@ class Neural_Model:
         # Get additional parameters (matrices)
         self.get_parameter(verbose=verbose)
         # Then load model
-        if (self.model_type == 'AMN_Wt'):
-            self.model = load_model(filemodel,custom_objects=\
-                                   {'RNNCell':RNNCell,'parameter':Neural_Model}, 
+        if self.model_type == 'AMN_Wt':
+            self.model = load_model(filemodel,
+                                    custom_objects={'RNNCell':RNNCell,
+                                                    'parameter':Neural_Model},
                                     compile=False)
+        elif self.model_type == 'AMN_LP':
+            print("bugs here")
+            from keras.models import model_from_json
+            json = filename + "_model.json"
+            json_file = open(json, 'r')
+            loaded_model_json = json_file.read()
+            json_file.close()
+            model = model_from_json(loaded_model_json)
+            model.load_weights(filemodel)
+            self.model = model
+            print("loaded")
         else:
             self.model = load_model(filemodel, compile=False)
 
