@@ -75,6 +75,14 @@ def my_mae(y_true, y_pred):
     end = y_true.shape[1]
     return keras.losses.mean_squared_error(y_true[:,:end], y_pred[:,:end])
 
+def my_r2(y_true, y_pred):
+    # Custom metric function
+    end = y_true.shape[1]
+    yt, yp = y_true[:,:end], y_pred[:,:end]
+    SS =  K.sum(K.square( yt-yp ))
+    ST = K.sum(K.square( yt - K.mean(yt) ) )
+    return 1 - SS/(ST + K.epsilon())
+
 def my_binary_crossentropy(y_true, y_pred):
     # Custom loss function
     end = y_true.shape[1]
@@ -287,7 +295,7 @@ def input_AMN(parameter, verbose=False):
 
     X, Y = parameter.X, parameter.Y
     if parameter.scaler != 0: # Normalize X
-        X, parameter.scaler = MaxScaler(X) 
+        X, parameter.scaler = MaxScaler(X)                 
     if verbose: print('AMN scaler', parameter.scaler)
     y = np.zeros(Y.shape[0]).reshape(Y.shape[0],1)
     Y = np.concatenate((Y, y), axis=1) # SV constraint
@@ -472,7 +480,7 @@ def AMN_QP(parameter, trainable=True, verbose=False):
                               verbose=verbose)
     # Compile
     model = keras.models.Model(inputs=[inputs], outputs=outputs)
-    (loss, metrics) = (my_mse, [my_mae])
+    (loss, metrics) = (my_mse, [my_r2])
     model.compile(loss=loss, optimizer='adam', metrics=metrics)
     if verbose == 2: print(model.summary())
     print('nbr parameters:', model.count_params())
@@ -621,7 +629,7 @@ def AMN_LP(parameter, trainable=True, verbose=False):
                               verbose=verbose)
     # Compile
     model = keras.models.Model(inputs=[inputs], outputs=outputs)
-    (loss, metrics) = (my_mse, [my_mae])
+    (loss, metrics) = (my_mse, [my_r2])
     model.compile(loss=loss, optimizer='adam', metrics=metrics)
     if verbose == 2: print(model.summary())
     print('nbr parameters:', model.count_params())
@@ -732,7 +740,7 @@ def AMN_Wt(parameter, verbose=False):
 
     # Compile
     model = keras.models.Model(inputs, outputs)
-    (loss, metrics) = (my_mse, [my_mae])
+    (loss, metrics) = (my_mse, [my_r2])
     model.compile(loss=loss,  optimizer='adam', metrics=metrics)
     if verbose == 2: print(model.summary())
     print('nbr parameters:', model.count_params())
@@ -840,9 +848,21 @@ def MM_QP(parameter, loss_outfile=None, targets_outfile= None,
 ###############################################################################
 
 def input_RC(parameter, verbose=False):
-    # Shape X and Y depending on the model used
-    if 'AMN' in parameter.model_type:
-        return input_AMN(parameter, verbose=verbose)
+    # Shape X and Y for RC
+    X, Y = parameter.X, parameter.Y
+    if parameter.scaler != 0: # Normalize X
+        X, parameter.scaler = MaxScaler(X) 
+    if verbose: print('AMN scaler', parameter.scaler)
+    if verbose: print('RC input shape',X.shape,Y.shape)
+    parameter.input_dim = parameter.X.shape[1]
+    
+    # non variable part is set to valmed
+    if parameter.mediumbound == 'UB':
+        for i in range(len(parameter.res.levmed)):
+            if parameter.res.levmed[i] == 1:
+                # Scale X with valmed
+                X[:,i] = parameter.res.valmed[i]
+    parameter.X, parameter.Y = X, Y
     return parameter.X, parameter.Y
 
 def RC(parameter, verbose=False):
@@ -890,10 +910,7 @@ def RC(parameter, verbose=False):
         Res_inputs = Res_inputs / parameter.res.scaler
     if verbose: print('Res inputs (final)', Res_inputs.shape)
     # Run reservoir
-    if 'AMN' in parameter.model_type:
-        Res_layers = QP_layers
-    else:
-        sys.exit('AMN is the only reservoir type handled with RC')
+    Res_layers = QP_layers
     Res_outputs, _, _ = Res_layers(Res_inputs, parameter.res,
                                    trainable=False, verbose=verbose)
     if verbose: print('Res_outputs--------------------', Res_outputs.shape)
@@ -906,7 +923,6 @@ def RC(parameter, verbose=False):
     V =    CROP(1, L+3, L+3+parameter.res.S.shape[1]) (Res_outputs) 
     if verbose: print('SV, PinV, Vpos, V--------------', 
                       SV.shape, PinV.shape, Vpos.shape, V.shape)
-
     # Post
     if parameter.post:
         if verbose: print('Post_inputs--------------------', Post_inputs.shape)
@@ -919,7 +935,7 @@ def RC(parameter, verbose=False):
 
     # Compile optimizer parametized for few data
     model = keras.models.Model(inputs, outputs)
-    (loss, metrics) = (my_mse, [my_mae]) if parameter.regression \
+    (loss, metrics) = (my_mse, [my_r2]) if parameter.regression \
     else (my_binary_crossentropy, [my_acc])
     opt = tf.keras.optimizers.Adam(learning_rate=parameter.train_rate)
     model.compile(loss=loss,  optimizer=opt, metrics=metrics)
@@ -988,7 +1004,6 @@ def print_loss_evaluate(y_true, y_pred, Vin, parameter):
 
 def get_loss_evaluate(x, y_true, y_pred, parameter, verbose=False):
     # Return loss on constraint for y_pred
-                
     end = y_true.shape[1] 
     if 'AMN' in parameter.model_type:
         nV = parameter.S.shape[1]
@@ -1010,15 +1025,23 @@ def get_loss_evaluate(x, y_true, y_pred, parameter, verbose=False):
                 
     return loss
 
-def evaluate_model(model, x, y_true, parameter, verbose=False):
+def evaluate_model(model, x, y_true, parameter, 
+                   inputmodel= False, verbose=False):
     # Return y_pred, stats (R2/Acc) for objective
     # and error on constraints for regression and classification
+    # if input model than x, y_true sent to input model
 
+    if inputmodel:
+        param = copy.copy(parameter)
+        param.X, param.Y = x, y_true
+        X, Y = model_input(param, verbose=verbose)
+        param.X, param.Y = X, Y        
     y_pred = model.predict(x) # whole y prediction
-    
+
     # AMN models have NBR_CONSTRAINT constraints added to y_true
     end = y_true.shape[1] - NBR_CONSTRAINT \
     if 'AMN' in parameter.model_type else y_true.shape[1] 
+    print('----------', end)
     if parameter.regression:
         yt, yp = y_true[:,:end], y_pred[:,:end]
         if yt.shape[0] == 1: # LOO case
@@ -1031,8 +1054,10 @@ def evaluate_model(model, x, y_true, parameter, verbose=False):
         else:
             obj = r2_score(yt, yp, multioutput='variance_weighted')
     else:
+        end = y_true.shape[1]
         obj = keras.metrics.binary_accuracy(y_true[:,:end],
                                             y_pred[:,:end]).numpy()
+        #print('evaluate acc \ny_true', y_true[:,:end], '\ny_pred', y_pred[:,:end])        
         obj = np.count_nonzero(obj)/obj.shape[0]
 
     # compute stats on constraints
@@ -1045,10 +1070,10 @@ def model_input(parameter, trainable=True, verbose=False):
     # return input for the appropriate model_type
     if   'ANN' in parameter.model_type:
         return input_ANN_Dense(parameter, verbose=verbose)
-    elif 'AMN' in parameter.model_type:
-        return input_AMN(parameter, verbose=verbose)    
     elif 'RC' in parameter.model_type:
         return input_RC(parameter, verbose=verbose)
+    elif 'AMN' in parameter.model_type:
+        return input_AMN(parameter, verbose=verbose)    
     elif 'MM' in parameter.model_type:
         return input_AMN(parameter, verbose=verbose)
     else:
@@ -1057,16 +1082,18 @@ def model_input(parameter, trainable=True, verbose=False):
 
 def model_type(parameter, verbose=False):
     # create the appropriate model_type
+    if verbose:
+        print('-----------------------------------', parameter.model_type)
     if 'ANN_Dense' in parameter.model_type:
         return ANN_Dense(parameter, verbose=verbose)
+    elif 'RC' in parameter.model_type:
+        return RC(parameter, verbose=verbose)
     elif 'AMN_LP' in parameter.model_type:
         return AMN_LP(parameter, verbose=verbose)
     elif 'AMN_QP' in parameter.model_type:
         return AMN_QP(parameter, verbose=verbose)
     elif 'AMN_Wt' in parameter.model_type:
         return AMN_Wt(parameter, verbose=verbose)
-    elif 'RC' in parameter.model_type:
-        return RC(parameter, verbose=verbose)
     else:
         print(parameter.model_type)
         sys.exit('not a trainable model')
@@ -1115,6 +1142,7 @@ def train_model(parameter, Xtrain, Ytrain, Xtest, Ytest, verbose=False):
         callbacks = [es] if model.es else []
         # fit
         v = True if verbose == 2 else False
+        epochs = 0.9 * model.epochs
         history = Net.model.fit(Xtrain, Ytrain, 
                                 validation_data=(Xtest, Ytest),
                                 epochs=model.epochs,
@@ -1161,6 +1189,8 @@ def train_evaluate_model(parameter, verbose=False):
     param = copy.copy(parameter)
     X, Y = model_input(param, verbose=verbose)
     param.X, param.Y = X, Y
+    # print('******', X[0])
+    
     # Train on all data
     if param.xfold < 2: # no cross-validation 
         Net, ytrain, ytest, otrain, ltrain, otest, ltest, history = \
@@ -1175,8 +1205,8 @@ def train_evaluate_model(parameter, verbose=False):
     kfold = KFold(n_splits=param.xfold, shuffle=True)
     kiter = 0
     for train, test in kfold.split(X, Y):
-        if verbose: print('-------train', train)
-        if verbose: print('-------test ', test)
+        if verbose: print('-------train', train, X[train].shape, Y[train].shape)
+        if verbose: print('-------test ', test, X[test].shape, Y[test].shape)
         Net, ytrain, ytest, otrain, ltrain, otest, ltest, history = \
         train_model(param, X[train], Y[train], X[test], Y[test], verbose=verbose)
         # compile Objective (O) and Constraint (C) for train and test
@@ -1472,7 +1502,7 @@ class RC_Model:
         self.niter = niter
         self.xfold = xfold
         self.es = es
-
+        
         # Create reservoir
         self.res = Neural_Model()
         self.res.load(reservoirfile)
@@ -1486,7 +1516,7 @@ class RC_Model:
         
         # Set RC model type 
         if 'AMN' in self.res.model_type: 
-            self.model_type = 'RC_AMN' 
+            self.model_type = 'RC' 
         else:
             sys.exit('AMN is the only reservoir type handled with RC')
         self.prior, self.post = None, None
@@ -1499,8 +1529,8 @@ class RC_Model:
                 for i in range(len(self.res.levmed)):
                     if self.res.levmed[i] == 1:
                         input_dim = input_dim - 1
-                        # Scale X with valmed
-                        self.X[:,i] = self.res.valmed[i]
+                        # Scale X with valmed now done in input_RC
+                        # self.X[:,i] = self.res.valmed[i]
                 output_dim = input_dim
             else: 
                 input_dim, output_dim = self.input_dim, self.res.input_dim

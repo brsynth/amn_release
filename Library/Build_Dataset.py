@@ -543,9 +543,9 @@ def create_random_medium_cobra(model, objective,
                                method=method, verbose=False)
         except:
             print('Cobra cannot be run start again')
-            treshold, iteration, up, valmed = \
-            init_constrained_objective(objective_value, in_treshold, 
-                            modmed, valmed, verbose=verbose)
+            # treshold, iteration, up, valmed = \
+            # init_constrained_objective(objective_value, in_treshold, 
+            #                 modmed, valmed, verbose=verbose)
             continue
             
         if obj < cobra_min_objective:

@@ -11,3 +11,4 @@ Result/MM_QP_Loss_e_coli_core_EB.csv
 Result/MM_QP_Loss_e_coli_core_UB.csv
 old/
 biolog_simulations.npy
+Reservoir/IJN*.h5
