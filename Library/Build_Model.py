@@ -156,13 +156,14 @@ def Loss_SV(V, S, gradient=False):
         dLoss =  0 * V
     return Loss_norm, dLoss
 
-def Loss_Vin(V, Pin, Vin, bound, gradient=False):
+def Loss_Vin(V, Pin, Vin, bound, parameter, gradient=False):
     # Gradient for input boundary constraint
     # Loss = ReLU(Pin . V - Vin)
     # dLoss = ∂(ReLU(Pin . V - Vin)^2/∂V
     # Input: Cf. Gradient_Descent
     Pin  = tf.convert_to_tensor(np.float32(Pin))
-    Loss = tf.linalg.matmul(V, tf.transpose(Pin), b_is_sparse=True) - Vin
+    Loss = tf.linalg.matmul(V, tf.transpose(Pin), b_is_sparse=True) - Vin 
+    # tf.cast(tf.multiply(Vin, parameter.scaler), tf.float32)
     Loss = tf.keras.activations.relu(Loss) if bound == 'UB' else Loss 
     Loss_norm = tf.norm(Loss, axis=1, keepdims=True)/Pin.shape[0] # rescaled
     if gradient:
@@ -192,7 +193,7 @@ def Loss_constraint(V, Vin, parameter, gradient=False):
     # mean squared sum L2+L3+L4
     L2, dL2 = Loss_SV(V, parameter.S, gradient=gradient)
     L3, dL3 = Loss_Vin(V, parameter.Pin, Vin,
-                       parameter.mediumbound, gradient=gradient)
+                       parameter.mediumbound, parameter, gradient=gradient)
     L4, dL4 = Loss_Vpos(V, parameter, gradient=gradient)
     # square sum of L2, L3, L4
     L2 = tf.math.square(L2)
@@ -212,7 +213,7 @@ def Loss_all(V, Vin, Vout, parameter, gradient=False):
     L1, dL1 = Loss_Vout(V, parameter.Pout, Vout, gradient=gradient)
     L2, dL2 = Loss_SV(V, parameter.S, gradient=gradient)
     L3, dL3 = Loss_Vin(V, parameter.Pin, Vin,
-                       parameter.mediumbound, gradient=gradient)
+                       parameter.mediumbound, parameter, gradient=gradient)
     L4, dL4 = Loss_Vpos(V, parameter, gradient=gradient)
     # square sum of L1, L2, L3, L4
     L1 = tf.math.square(L1)
@@ -348,7 +349,7 @@ def output_AMN(V, Vin, V0, parameter, verbose=False):
     Pout     = tf.convert_to_tensor(np.float32(parameter.Pout))
     PoutV    = tf.linalg.matmul(V, tf.transpose(Pout), b_is_sparse=True)
     SV, _    = Loss_SV(V, parameter.S) # SV const
-    PinV, _  = Loss_Vin(V, parameter.Pin, Vin, parameter.mediumbound) # Pin const
+    PinV, _  = Loss_Vin(V, parameter.Pin, Vin, parameter.mediumbound, parameter) # Pin const
     Vpos, _  = Loss_Vpos(V, parameter) # V ≥ 0 const
 
     # Return outputs = PoutV + SV + PinV + Vpos + V
@@ -408,14 +409,14 @@ def get_V0(inputs, parameter, targets, trainable, verbose=False):
     Pin = tf.convert_to_tensor(np.float32(parameter.Pin))
     if targets.shape[0] > 0: # Initialize AMN when targets provided
         # Vin = inputs, V0 = (Pin)^T Vin
-        Vin  = inputs
+        Vin = inputs # tf.cast(tf.multiply(inputs, parameter.scaler), tf.float32)
         V0 = tf.linalg.matmul(inputs, Pin, b_is_sparse=True)
     else: # Initialize AMN when targets not provided
         # Vin = inputs, V0 = Dense_layers(inputs)
         param = copy.copy(parameter)
         param.output_dim = parameter.S.shape[1]
         param.activation = 'relu'
-        Vin = inputs
+        Vin = inputs # tf.cast(tf.multiply(inputs, parameter.scaler), tf.float32)
         V0 = Dense_layers(inputs, param,
                           trainable=trainable, verbose=verbose)
 
@@ -1413,7 +1414,7 @@ class Neural_Model:
                                                     'parameter':Neural_Model},
                                     compile=False)
         elif self.model_type == 'AMN_LP':
-            print("bugs here")
+            # print("bugs here")
             from keras.models import model_from_json
             json = filename + "_model.json"
             json_file = open(json, 'r')
@@ -1422,7 +1423,7 @@ class Neural_Model:
             model = model_from_json(loaded_model_json)
             model.load_weights(filemodel)
             self.model = model
-            print("loaded")
+            # print("loaded")
         else:
             self.model = load_model(filemodel, compile=False)
 
