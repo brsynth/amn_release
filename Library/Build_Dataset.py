@@ -25,6 +25,9 @@ from cobra.flux_analysis import pfba
 from sklearn.utils import shuffle
 sys.setrecursionlimit(10000) # for row_echelon function
 
+import optlang
+optlang.glpk_interface.Configuration() # to avoid weird message and setup LP solver
+
 ###############################################################################
 # IOs with pandas
 ###############################################################################
@@ -429,6 +432,9 @@ def run_cobra(model, objective, IN, method='FBA', verbose=False,
         if k in medium.keys():
             medium[k] = float(IN[k])
     model.medium = medium
+
+    # fix solver timeout
+    model.solver.configuration = optlang.glpk_interface.Configuration(timeout=5, presolve='auto', lp_method='simplex')
 
     # run FBA for primal objective
     model.objective = objective[0]
