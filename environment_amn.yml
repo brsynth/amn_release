@@ -17,3 +17,4 @@ dependencies:
   - ipykernel
   - pip:
     - silence-tensorflow
+    - scikeras
