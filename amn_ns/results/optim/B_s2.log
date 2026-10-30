@@ -1,0 +1,15 @@
+(280, 1) (1, 3682)
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+fold0            n_train=224 n_test= 56 R2=0.7924 viol=0.175 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (110.4 min)
+fold1            n_train=224 n_test= 56 R2=0.7041 viol=0.18 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (110.1 min)
+fold2            n_train=224 n_test= 56 R2=0.8496 viol=0.177 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (109.4 min)
+fold3            n_train=224 n_test= 56 R2=0.7766 viol=0.171 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (93.4 min)
+fold4            n_train=224 n_test= 56 R2=0.7668 viol=0.164 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (60.0 min)
+pooled R2 over all test predictions: 0.7812
+(280, 1) (1, 3682)
+fold0            n_train=224 n_test= 56 R2=0.7586 viol=nan {'alpha': 0.0001, 'hidden': 1000} (8.6 min)
+fold1            n_train=224 n_test= 56 R2=0.7628 viol=nan {'alpha': 0.01, 'hidden': 1000} (13.0 min)
+fold2            n_train=224 n_test= 56 R2=0.8100 viol=nan {'alpha': 0.01, 'hidden': 1000} (10.5 min)
+fold3            n_train=224 n_test= 56 R2=0.6463 viol=nan {'alpha': 0.01, 'hidden': 1000} (11.4 min)
+fold4            n_train=224 n_test= 56 R2=0.7812 viol=nan {'alpha': 0.01, 'hidden': 256} (0.5 min)
+pooled R2 over all test predictions: 0.7576

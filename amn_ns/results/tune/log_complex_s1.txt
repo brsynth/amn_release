@@ -1,0 +1,18 @@
+(280, 1) (1, 3682)
+reduced model u=5: 2712 reactions, null dim 1330, K=20
+reduced model u=6.5: 2712 reactions, null dim 1330, K=20
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+(280, 1) (1, 3682)
+reduced model u=5: 2712 reactions, null dim 1330, K=20
+reduced model u=6.5: 2712 reactions, null dim 1330, K=20
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+(280, 1) (1, 3682)
+reduced model u=5: 2712 reactions, null dim 1330, K=20
+reduced model u=6.5: 2712 reactions, null dim 1330, K=20
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+le10             n_train= 75 n_test=205 R2=0.3811 viol=0.407 {'param': 'null', 'encoder': 'linear', 'beta': 0.03, 'uptake': 10.0, 'epochs': 200} (66.7 min)
+pooled R2 over all test predictions: 0.3811
+le12             n_train=130 n_test=150 R2=0.5579 viol=0.268 {'param': 'null', 'encoder': 'linear', 'beta': 0.03, 'uptake': 6.5, 'epochs': 200} (118.4 min)
+pooled R2 over all test predictions: 0.5579
+le14             n_train=164 n_test=116 R2=0.6003 viol=0.345 {'param': 'null', 'encoder': 'linear', 'beta': 0.03, 'uptake': 10.0, 'epochs': 100} (141.0 min)
+pooled R2 over all test predictions: 0.6003

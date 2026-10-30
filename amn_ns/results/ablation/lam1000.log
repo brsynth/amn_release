@@ -1,0 +1,12 @@
+(280, 1) (1, 3682)
+lam=1000.0  tag=lam1000  -> results/ablation/ablation_lam1000.csv
+size  10% draw 0: R2=-2.1819 SV_rel=0.607 Pin_viol=0 (6.8 min)
+size  10% draw 1: R2=-2.2246 SV_rel=0.55 Pin_viol=0 (6.8 min)
+size  10% draw 2: R2=-0.4200 SV_rel=0.81 Pin_viol=0 (6.7 min)
+size  20% draw 0: R2=-2.3774 SV_rel=0.484 Pin_viol=0 (9.2 min)
+size  20% draw 1: R2=-1.9362 SV_rel=0.379 Pin_viol=0 (8.8 min)
+size  20% draw 2: R2=0.1152 SV_rel=0.536 Pin_viol=0 (9.1 min)
+size  50% draw 0: R2=0.3523 SV_rel=0.357 Pin_viol=0 (16.7 min)
+size  50% draw 1: R2=-1.3909 SV_rel=0.31 Pin_viol=0 (15.6 min)
+size  50% draw 2: R2=0.2037 SV_rel=0.486 Pin_viol=0 (15.8 min)
+size 100% draw 0: R2=-2.0567 SV_rel=0.193 Pin_viol=0 (28.5 min)

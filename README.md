@@ -1,5 +1,13 @@
 # Welcome to the Artificial Metabolic Networks repository
 
+> **Branch `amn_ns`: AMN-NS.** The folder [`amn_ns/`](amn_ns/) contains AMN-NS,
+> an AMN variant in which the steady-state mass balance SV = 0 holds exactly
+> (null-space parametrisation and a fixed projection layer), with its
+> baselines (FBA, MLR, MLP) and results on the *E. coli* dataset. It is a
+> self-contained project: see [`amn_ns/README.md`](amn_ns/README.md) and run
+> its scripts from that folder. The rest of this branch is the AMN release
+> unchanged.
+
 This repository is entirely written in **python**. We make use of **jupyter** notebooks,
 calling custom functions libraries storing the main objects and functions used in the project. We detail here two ways of using the repo, either on **Colab** or **locally**.
 
