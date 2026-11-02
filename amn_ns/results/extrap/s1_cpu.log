@@ -1,0 +1,18 @@
+(280, 1) (1, 3682)
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+n20_fold0        n_train= 20 n_test= 56 R2=0.0820 viol=0.253 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (3.4 min)
+n20_fold1        n_train= 20 n_test= 56 R2=0.2077 viol=0.247 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (3.4 min)
+n20_fold2        n_train= 20 n_test= 56 R2=0.3075 viol=0.261 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (3.5 min)
+n20_fold3        n_train= 20 n_test= 56 R2=0.1776 viol=0.309 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (5.8 min)
+n20_fold4        n_train= 20 n_test= 56 R2=0.0694 viol=0.29 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (8.4 min)
+n40_fold0        n_train= 40 n_test= 56 R2=0.1631 viol=0.223 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (2.2 min)
+n40_fold1        n_train= 40 n_test= 56 R2=0.5296 viol=0.245 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (2.1 min)
+n40_fold2        n_train= 40 n_test= 56 R2=0.2584 viol=0.239 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (2.1 min)
+n40_fold3        n_train= 40 n_test= 56 R2=0.3326 viol=0.221 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (2.1 min)
+n40_fold4        n_train= 40 n_test= 56 R2=0.1530 viol=0.237 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (2.1 min)
+n80_fold0        n_train= 80 n_test= 56 R2=0.5370 viol=0.183 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (2.0 min)
+n80_fold1        n_train= 80 n_test= 56 R2=0.7103 viol=0.242 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (2.0 min)
+n80_fold2        n_train= 80 n_test= 56 R2=0.4568 viol=0.202 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (2.1 min)
+n80_fold3        n_train= 80 n_test= 56 R2=0.6097 viol=0.242 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (2.1 min)
+n80_fold4        n_train= 80 n_test= 56 R2=0.7736 viol=0.197 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (2.1 min)
+pooled R2 over all test predictions: 0.3879

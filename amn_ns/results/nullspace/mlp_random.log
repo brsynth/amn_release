@@ -1,0 +1,7 @@
+(280, 1) (1, 3682)
+fold0            n_train=224 n_test= 56 R2=0.6986 viol=0 (2.1 min)
+fold1            n_train=224 n_test= 56 R2=0.7366 viol=0 (1.8 min)
+fold2            n_train=224 n_test= 56 R2=0.7330 viol=0 (2.3 min)
+fold3            n_train=224 n_test= 56 R2=0.7616 viol=0 (2.0 min)
+fold4            n_train=224 n_test= 56 R2=0.7398 viol=0 (2.4 min)
+pooled R2 over all test predictions: 0.7465

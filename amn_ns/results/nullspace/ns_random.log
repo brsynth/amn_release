@@ -1,0 +1,8 @@
+(280, 1) (1, 3682)
+reduced model: 2712 reactions, null dim 1330, K=20
+fold0            n_train=224 n_test= 56 R2=0.7027 viol=0.197 (13.0 min)
+fold1            n_train=224 n_test= 56 R2=0.8071 viol=0.249 (7.9 min)
+fold2            n_train=224 n_test= 56 R2=0.8095 viol=0.194 (10.5 min)
+fold3            n_train=224 n_test= 56 R2=0.8361 viol=0.192 (13.3 min)
+fold4            n_train=224 n_test= 56 R2=0.7617 viol=0.181 (12.3 min)
+pooled R2 over all test predictions: 0.7946

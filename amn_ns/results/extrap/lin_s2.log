@@ -1,0 +1,38 @@
+(280, 1) (1, 3682)
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+le10             n_train= 75 n_test=205 R2=0.3672 viol=0.436 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (1.1 min)
+le12             n_train=130 n_test=150 R2=0.6409 viol=0.24 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (1.8 min)
+le14             n_train=164 n_test=116 R2=0.6730 viol=0.274 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (2.4 min)
+pooled R2 over all test predictions: 0.5447
+(280, 1) (1, 3682)
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+le10             n_train= 75 n_test=205 R2=0.4569 viol=0.569 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (1.1 min)
+le12             n_train=130 n_test=150 R2=0.6875 viol=0.238 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (1.8 min)
+le14             n_train=164 n_test=116 R2=0.5692 viol=0.361 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (2.5 min)
+pooled R2 over all test predictions: 0.5648
+(280, 1) (1, 3682)
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+n20_fold0        n_train= 20 n_test= 56 R2=0.2413 viol=0.297 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.3 min)
+n20_fold1        n_train= 20 n_test= 56 R2=0.1796 viol=0.232 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.4 min)
+n20_fold2        n_train= 20 n_test= 56 R2=-0.0434 viol=0.261 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.6 min)
+n20_fold3        n_train= 20 n_test= 56 R2=0.3897 viol=0.366 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.6 min)
+n20_fold4        n_train= 20 n_test= 56 R2=-0.2794 viol=0.307 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.5 min)
+n40_fold0        n_train= 40 n_test= 56 R2=0.5007 viol=0.27 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.5 min)
+n40_fold1        n_train= 40 n_test= 56 R2=0.5303 viol=0.211 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.4 min)
+n40_fold2        n_train= 40 n_test= 56 R2=0.4704 viol=0.237 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.3 min)
+n40_fold3        n_train= 40 n_test= 56 R2=0.5990 viol=0.279 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.5 min)
+n40_fold4        n_train= 40 n_test= 56 R2=0.2292 viol=0.244 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.4 min)
+n80_fold0        n_train= 80 n_test= 56 R2=0.7453 viol=0.245 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.4 min)
+n80_fold1        n_train= 80 n_test= 56 R2=0.6835 viol=0.225 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.4 min)
+n80_fold2        n_train= 80 n_test= 56 R2=0.6635 viol=0.229 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.4 min)
+n80_fold3        n_train= 80 n_test= 56 R2=0.6968 viol=0.229 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.4 min)
+n80_fold4        n_train= 80 n_test= 56 R2=0.4548 viol=0.245 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.5 min)
+pooled R2 over all test predictions: 0.4120
+(280, 1) (1, 3682)
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+fold0            n_train=224 n_test= 56 R2=0.8352 viol=0.195 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.5 min)
+fold1            n_train=224 n_test= 56 R2=0.7133 viol=0.207 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.4 min)
+fold2            n_train=224 n_test= 56 R2=0.8581 viol=0.199 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (3.5 min)
+fold3            n_train=224 n_test= 56 R2=0.7627 viol=0.208 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (2.5 min)
+fold4            n_train=224 n_test= 56 R2=0.7934 viol=0.19 {'param': 'null', 'encoder': 'linear', 'beta': 0.1, 'uptake': 10.0} (2.2 min)
+pooled R2 over all test predictions: 0.7966

@@ -1,0 +1,17 @@
+(280, 1) (1, 3682)
+reduced model: 2712 reactions, null dim 1330, K=20
+glc__D           n_train=197 n_test= 83 R2=-8.2260 viol=0.218 (11.5 min)
+xyl__D           n_train=208 n_test= 72 R2=-2.7625 viol=0.24 (7.5 min)
+succ             n_train=213 n_test= 67 R2=-0.7761 viol=0.321 (9.2 min)
+ala__L+asn__L+asp__L n_train=143 n_test=137 R2=0.5632 viol=0.225 (8.3 min)
+arg__L+pro__L    n_train=122 n_test=158 R2=0.2842 viol=0.267 (7.6 min)
+cys__L+met__L    n_train=128 n_test=152 R2=0.3670 viol=0.17 (7.1 min)
+glu__L+gln__L    n_train=101 n_test=179 R2=0.4331 viol=0.242 (5.5 min)
+gly+ser__L+thr__L n_train=103 n_test=177 R2=-0.3148 viol=0.23 (3.8 min)
+his__L           n_train=131 n_test=149 R2=0.6233 viol=0.267 (6.0 min)
+ile__L+leu__L+val__L n_train=136 n_test=144 R2=-0.3232 viol=0.18 (4.5 min)
+lys__L           n_train=113 n_test=167 R2=0.5423 viol=0.212 (1.8 min)
+phe__L+trp__L+tyr__L n_train=151 n_test=129 R2=0.6546 viol=0.193 (2.0 min)
+ade+gua          n_train=205 n_test= 75 R2=0.6690 viol=0.212 (2.7 min)
+csn+ura+thymd    n_train=204 n_test= 76 R2=0.7104 viol=0.176 (2.5 min)
+pooled R2 over all test predictions: 0.1051

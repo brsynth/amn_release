@@ -1,0 +1,33 @@
+(280, 1) (1, 3682)
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+2026-10-28 20:52:32.505238: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:961] model_pruner failed: INVALID_ARGUMENT: Graph does not contain terminal node Adam/AssignAddVariableOp.
+fold0            n_train=224 n_test= 56 R2=0.6836 viol=0.204 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (8.6 min)
+2026-10-28 21:01:07.806532: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:961] model_pruner failed: INVALID_ARGUMENT: Graph does not contain terminal node Adam/AssignAddVariableOp.
+fold1            n_train=224 n_test= 56 R2=0.8283 viol=0.217 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (41.4 min)
+2026-10-28 21:42:31.021740: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:961] model_pruner failed: INVALID_ARGUMENT: Graph does not contain terminal node Adam/AssignAddVariableOp.
+fold2            n_train=224 n_test= 56 R2=0.7799 viol=0.186 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (21.4 min)
+2026-10-28 22:03:58.589462: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:961] model_pruner failed: INVALID_ARGUMENT: Graph does not contain terminal node Adam/AssignAddVariableOp.
+fold3            n_train=224 n_test= 56 R2=0.7804 viol=0.22 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (21.2 min)
+2026-10-28 22:25:09.367951: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:961] model_pruner failed: INVALID_ARGUMENT: Graph does not contain terminal node Adam/AssignAddVariableOp.
+fold4            n_train=224 n_test= 56 R2=0.6652 viol=0.19 {'param': 'null', 'beta': 0.1, 'uptake': 10.0} (25.3 min)
+pooled R2 over all test predictions: 0.7586
+(280, 1) (1, 3682)
+reduced model u=10: 2712 reactions, null dim 1330, K=20
+2026-10-28 22:50:34.731166: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:961] model_pruner failed: INVALID_ARGUMENT: Graph does not contain terminal node Adam/AssignAddVariableOp.
+fold0            n_train=224 n_test= 56 R2=0.6701 viol=0.245 {'param': 'flux', 'beta': 0.1, 'uptake': 10.0} (23.1 min)
+2026-10-28 23:13:44.038709: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:961] model_pruner failed: INVALID_ARGUMENT: Graph does not contain terminal node Adam/AssignAddVariableOp.
+fold1            n_train=224 n_test= 56 R2=0.8245 viol=0.202 {'param': 'flux', 'beta': 0.1, 'uptake': 10.0} (23.5 min)
+2026-10-28 23:37:13.446245: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:961] model_pruner failed: INVALID_ARGUMENT: Graph does not contain terminal node Adam/AssignAddVariableOp.
+fold2            n_train=224 n_test= 56 R2=0.7429 viol=0.215 {'param': 'flux', 'beta': 0.1, 'uptake': 10.0} (29.0 min)
+2026-10-29 00:06:15.975654: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:961] model_pruner failed: INVALID_ARGUMENT: Graph does not contain terminal node Adam/AssignAddVariableOp.
+fold3            n_train=224 n_test= 56 R2=0.8094 viol=0.228 {'param': 'flux', 'beta': 0.1, 'uptake': 10.0} (26.2 min)
+2026-10-29 00:32:29.224562: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:961] model_pruner failed: INVALID_ARGUMENT: Graph does not contain terminal node Adam/AssignAddVariableOp.
+fold4            n_train=224 n_test= 56 R2=0.7015 viol=0.171 {'param': 'flux', 'beta': 0.1, 'uptake': 10.0} (26.4 min)
+pooled R2 over all test predictions: 0.7623
+(280, 1) (1, 3682)
+fold0            n_train=224 n_test= 56 R2=0.6674 viol=nan {'alpha': 0.0001, 'hidden': 1000} (1.2 min)
+fold1            n_train=224 n_test= 56 R2=0.7624 viol=nan {'alpha': 0.0001, 'hidden': 1000} (0.8 min)
+fold2            n_train=224 n_test= 56 R2=0.7333 viol=nan {'alpha': 0.0001, 'hidden': 1000} (0.9 min)
+fold3            n_train=224 n_test= 56 R2=0.7799 viol=nan {'alpha': 0.0001, 'hidden': 1000} (1.9 min)
+fold4            n_train=224 n_test= 56 R2=0.7066 viol=nan {'alpha': 0.0001, 'hidden': 1000} (2.8 min)
+pooled R2 over all test predictions: 0.7431

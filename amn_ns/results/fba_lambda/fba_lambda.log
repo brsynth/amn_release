@@ -1,0 +1,49 @@
+(280, 1) (1, 3682)
+lambda= 0.50  R2=-10.330  pearson=nan
+lambda= 1.00  R2= -9.618  pearson=0.508
+lambda= 1.50  R2= -7.962  pearson=0.530
+lambda= 2.00  R2= -6.427  pearson=0.528
+lambda= 2.50  R2= -5.051  pearson=0.527
+lambda= 3.00  R2= -3.837  pearson=0.525
+lambda= 3.50  R2= -2.786  pearson=0.524
+lambda= 4.00  R2= -1.895  pearson=0.523
+lambda= 4.50  R2= -1.166  pearson=0.522
+lambda= 5.00  R2= -0.598  pearson=0.522
+lambda= 5.50  R2= -0.190  pearson=0.521
+lambda= 6.00  R2=  0.057  pearson=0.521
+lambda= 6.50  R2=  0.144  pearson=0.520
+lambda= 7.00  R2=  0.070  pearson=0.520
+lambda= 7.50  R2= -0.165  pearson=0.520
+lambda= 8.00  R2= -0.560  pearson=0.519
+lambda= 8.50  R2= -1.116  pearson=0.519
+lambda= 9.00  R2= -1.833  pearson=0.519
+lambda= 9.50  R2= -2.710  pearson=0.519
+lambda=10.00  R2= -3.747  pearson=0.518
+lambda=10.50  R2= -4.945  pearson=0.518
+lambda=11.00  R2= -6.304  pearson=0.518
+lambda=11.50  R2= -7.823  pearson=0.518
+lambda=12.00  R2= -9.503  pearson=0.518
+lambda=12.50  R2=-11.343  pearson=0.518
+lambda=13.00  R2=-13.344  pearson=0.518
+lambda=13.50  R2=-15.505  pearson=0.518
+lambda=14.00  R2=-17.827  pearson=0.517
+lambda=14.50  R2=-20.309  pearson=0.517
+lambda=15.00  R2=-22.952  pearson=0.517
+lambda=15.50  R2=-25.756  pearson=0.517
+lambda=16.00  R2=-28.720  pearson=0.517
+lambda=16.50  R2=-31.844  pearson=0.517
+lambda=17.00  R2=-35.129  pearson=0.517
+lambda=17.50  R2=-38.575  pearson=0.517
+lambda=18.00  R2=-42.181  pearson=0.517
+lambda=18.50  R2=-45.948  pearson=0.517
+lambda=19.00  R2=-49.875  pearson=0.517
+lambda=19.50  R2=-53.963  pearson=0.517
+lambda=20.00  R2=-58.211  pearson=0.517
+
+published protocol: best lambda=6.5  R2=0.144
+  fold: lambda chosen on training = 6.5
+  fold: lambda chosen on training = 6.5
+  fold: lambda chosen on training = 6.5
+  fold: lambda chosen on training = 6.5
+  fold: lambda chosen on training = 6.5
+cross-validated (lambda chosen on training folds): R2=0.144
